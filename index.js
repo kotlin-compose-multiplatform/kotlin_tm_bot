@@ -1,4 +1,8 @@
 const Telegraf = require('telegraf')
+const express = require('express');
+
+const app = express()
+const port = 3000
 require('dotenv').config()
 const bot = new Telegraf.Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => ctx.reply('Salam bu kotlin.tm!'));
@@ -30,4 +34,12 @@ bot.on("message", async ctx => {
   // returning calls is also okay, because the promise will be returned
   return res.statusText;
 });
-bot.launch()
+bot.launch();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
