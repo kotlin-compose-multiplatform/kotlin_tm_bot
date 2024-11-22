@@ -12,9 +12,6 @@ app.use(cors());
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
-const openAi = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // This is the default and can be omitted
-});
 const bot = new Telegraf.Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) =>
   ctx.reply("Salam kotlin kod yazyp ugradyn we rezultady gorun!!!")
@@ -81,12 +78,6 @@ bot.on("message", async (ctx) => {
 bot.launch();
 
 app.get("/", async (req, res) => {
-  const chatCompletion = await openAi.chat.completions.create({
-    messages: [{ role: "user", content: "write calculater jetpack compose" }],
-    model: "gpt-4o-mini",
-  });
-  console.log(chatCompletion);
-
   res.send("Hello World!");
 });
 
